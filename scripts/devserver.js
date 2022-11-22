@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-require('esbuild')
-    .serve({
-        servedir: 'www/index.html'
-    }).catch(() => process.exit(1));
+console.log(`\nYet to be implemented!\n`)
+// require('esbuild')
+//     .serve({
+//         servedir: 'www/index.html'
+//     }).catch(() => process.exit(1));

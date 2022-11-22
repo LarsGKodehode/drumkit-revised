@@ -1,0 +1,20 @@
+{
+  "name": "drumkit-revised",
+  "version": "0.1",
+  "description": "Remake of earlier vanilla JavaScript drumkit project with new gained knowledge.",
+  "repository": "https://larsgunnar.no/drumkit-revised",
+  "main": "src/main.js",
+  "source": "src/index.html",
+  "author": "LarsG",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "./scripts/devserver.js",
+    "prebuild": "rm -rf build/*",
+    "build": "./scripts/build.js",
+    "postbuild": "cp -r ./public/* ./build/"
+  },
+  "devDependencies": {
+    "esbuild": "^0.15.15"
+  }
+}

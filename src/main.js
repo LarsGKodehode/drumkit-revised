@@ -135,7 +135,7 @@ function createNode(instrument, handleClick) {
     node.title = `Hotkey: ${instrument.code.slice(3)}`;
 
     // Attach event handler
-    node.onclick = () => handleClick();
+    node.onclick = handleClick;
 
     return node;
 };
@@ -154,16 +154,16 @@ function createInstrument(
     const sound = soundBuffer.addAsset([soundFolder, instrument.sound].join("/"));
 
     /**
-     * Plays a audio file
+     * Plays a sound
      */
     function playSound() {
         sound.currentTime = 0;
         sound.play();
-    };
+    }
 
     root.appendChild(createNode(instrument, playSound));
 
-    keyBindings.bindKey(() => playSound(), instrument.code);
+    keyBindings.bindKey(playSound, instrument.code);
 };
 
 /**

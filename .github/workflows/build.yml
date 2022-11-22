@@ -19,7 +19,7 @@ jobs:
           cache: 'npm'
 
       - name: Install yarn
-        run: npm install yarn
+        run: npm install --location=global yarn
 
       - name: Install dependencies
          run: yarn install

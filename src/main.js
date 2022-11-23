@@ -126,13 +126,14 @@ function createNode(instrument, handleClick) {
     const node = document.createElement("button");
 
     // Custumize node
-    const text = String(instrument.id).charAt(0).toUpperCase() + instrument.id.slice(1);
-    node.textContent = text;
+    node.textContent = instrument.type;
     node.classList = [
         "instrument",
         instrument.type,
     ].join(" ");
-    node.title = `Hotkey: ${instrument.code.slice(3)}`;
+    
+    const title = String(instrument.id).charAt(0).toUpperCase() + instrument.id.slice(1);
+    node.title = title;
 
     // Attach event handler
     node.onclick = handleClick;
@@ -202,7 +203,7 @@ const soundBuffer2 = createAssetBuffer();
 // Badly placed import here
 import { violinNotes } from "./assets/Strings/instruments.js";
 const notesViolin = violinNotes.map((note) => {
-    return {id: `violin_${note.note}`, sound: note.sound, code: "KeyT", type: "string"};
+    return {id: `violin_${note.note}`, sound: note.sound, code: null, type: "string"};
 })
 const instrumentsOptions2 = {
     instruments: notesViolin,

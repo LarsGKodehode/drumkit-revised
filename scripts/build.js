@@ -6,7 +6,7 @@ require('esbuild')
     entryPoints: ['src/main.js'],
     bundle: true,
     outdir: 'build',
-    minify: true,
+    minify: false,
     sourcemap: true,
     loader: {
       ".html": "text",

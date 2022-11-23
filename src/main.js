@@ -1,10 +1,9 @@
-// ==================
+// ====================
 // Enviroment Variables
-// ==================
+// ====================
 
 const SOUND_DIR = "assets";
 const root = document.getElementById("root");
-import instruments from "./data/instruments.js";
 
 
 // ==========================
@@ -127,7 +126,8 @@ function createNode(instrument, handleClick) {
     const node = document.createElement("button");
 
     // Custumize node
-    node.textContent = String(instrument.id).charAt(0).toUpperCase() + instrument.id.slice(1);
+    const text = String(instrument.id).charAt(0).toUpperCase() + instrument.id.slice(1);
+    node.textContent = text;
     node.classList = [
         "instrument",
         instrument.type,
@@ -170,7 +170,7 @@ function createInstrument(
  * Create all the instruments
  */
 function createInstruments(options) {
-    instruments.forEach(instrument => createInstrument({instrument, ...options}));
+    options.instruments.forEach(instrument => createInstrument({instrument, ...options}));
 };
 
 
@@ -178,14 +178,37 @@ function createInstruments(options) {
 // Actually starting up the stuff
 // ==============================
 
+// Drums
 const keyBindings =  createKeyBindingBuffer();
 const keyboardListner = createKeyboardListner(keyBindings);
 const soundBuffer = createAssetBuffer();
 
+// Badly placed import here
+import instruments from "./data/instruments.js";
 const instrumentsOptions = {
+    instruments: instruments,
     root: root,
-    soundFolder: SOUND_DIR,
+    soundFolder: SOUND_DIR + "/Drums",
     soundBuffer: soundBuffer,
 };
 createInstruments(instrumentsOptions);
 keyboardListner.start();
+
+// Strings
+const keyBindings2 =  createKeyBindingBuffer();
+const keyboardListner2 = createKeyboardListner(keyBindings2);
+const soundBuffer2 = createAssetBuffer();
+
+// Badly placed import here
+import { violinNotes } from "./assets/Strings/instruments.js";
+const notesViolin = violinNotes.map((note) => {
+    return {id: `violin_${note.note}`, sound: note.sound, code: "KeyT", type: "string"};
+})
+const instrumentsOptions2 = {
+    instruments: notesViolin,
+    root: root,
+    soundFolder: SOUND_DIR + "/Strings/violin",
+    soundBuffer: soundBuffer2,
+};
+createInstruments(instrumentsOptions2);
+keyboardListner2.start();

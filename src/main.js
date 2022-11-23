@@ -185,9 +185,9 @@ const keyboardListner = createKeyboardListner(keyBindings);
 const soundBuffer = createAssetBuffer();
 
 // Badly placed import here
-import instruments from "./data/instruments.js";
+import { drums } from "./assets/instruments.js";
 const instrumentsOptions = {
-    instruments: instruments,
+    instruments: drums,
     root: root,
     soundFolder: SOUND_DIR + "/Drums",
     soundBuffer: soundBuffer,
@@ -201,7 +201,7 @@ const keyboardListner2 = createKeyboardListner(keyBindings2);
 const soundBuffer2 = createAssetBuffer();
 
 // Badly placed import here
-import { violinNotes } from "./assets/Strings/instruments.js";
+import { violinNotes } from "./assets/instruments.js";
 const notesViolin = violinNotes.map((note) => {
     return {id: `violin_${note.note}`, sound: note.sound, code: null, type: "string"};
 })

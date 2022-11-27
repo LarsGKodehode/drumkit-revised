@@ -87,16 +87,17 @@ function createKeyboardListner(keyBindings) {
 
 /**
  * Creates a new array buffer for storing assets in memory
+ * @storeFnct A callback which return value is stored in the array
  */
-function createAssetBuffer() {
+function createAssetBuffer(storeFnct) {
     let buffer = [];
     
     /**
-     * Takes a path to an audio file and stores the audio file in the array buffer
-     * @return refrence to audio file
+     * Uses the callback to store somthing in the buffer
+     * @return reference to stored value/object
      */
-     function addAsset(path) {
-        const newLength = buffer.push(new Audio(path));
+    function addAsset(args) {
+        const newLength = buffer.push(storeFnct(args));
         return buffer[newLength - 1];
     };
 
@@ -182,7 +183,7 @@ function createInstruments(options) {
 // Drums
 const keyBindings =  createKeyBindingBuffer();
 const keyboardListner = createKeyboardListner(keyBindings);
-const soundBuffer = createAssetBuffer();
+const soundBuffer = createAssetBuffer((path) => new Audio(path));
 
 // Badly placed import here
 import { drums } from "./assets/instruments.js";
@@ -198,7 +199,7 @@ keyboardListner.start();
 // Strings
 const keyBindings2 =  createKeyBindingBuffer();
 const keyboardListner2 = createKeyboardListner(keyBindings2);
-const soundBuffer2 = createAssetBuffer();
+const soundBuffer2 = createAssetBuffer((path) => new Audio(path));
 
 // Badly placed import here
 import { violinNotes } from "./assets/instruments.js";

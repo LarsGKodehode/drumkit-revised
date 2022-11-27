@@ -109,10 +109,10 @@
       stop: controller.abort
     };
   }
-  function createAssetBuffer() {
+  function createAssetBuffer(storeFnct) {
     let buffer = [];
-    function addAsset(path) {
-      const newLength = buffer.push(new Audio(path));
+    function addAsset(args) {
+      const newLength = buffer.push(storeFnct(args));
       return buffer[newLength - 1];
     }
     ;
@@ -156,7 +156,7 @@
   }
   var keyBindings = createKeyBindingBuffer();
   var keyboardListner = createKeyboardListner(keyBindings);
-  var soundBuffer = createAssetBuffer();
+  var soundBuffer = createAssetBuffer((path) => new Audio(path));
   var instrumentsOptions = {
     instruments: drums,
     root,
@@ -167,7 +167,7 @@
   keyboardListner.start();
   var keyBindings2 = createKeyBindingBuffer();
   var keyboardListner2 = createKeyboardListner(keyBindings2);
-  var soundBuffer2 = createAssetBuffer();
+  var soundBuffer2 = createAssetBuffer((path) => new Audio(path));
   var notesViolin = violinNotes.map((note) => {
     return { id: `violin_${note.note}`, sound: note.sound, code: null, type: "string" };
   });
